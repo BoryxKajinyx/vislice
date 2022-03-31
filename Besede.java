@@ -13,7 +13,28 @@ public class Besede {
         "BESEDA",
         "OGLEDALO",
         "EASISTENT",
-        "OKNO"
+        "OKNO",
+        "OTORINOLARINOLOG",
+        "TELEFON",
+        "BESEDA",
+        "GOSTILNA",
+        "ZVEZDA",
+        "PIZZERIJA",
+        "STOL",
+        "STAVEK",
+        "JAVA",
+        "IGRA",
+        "FIZIKA",
+        "TORBA",
+        "ZAVESA",
+        "TABLA",
+        "PLASTENKA",
+        "DREVO",
+        "SVETILO",
+        "KLIMATSKA NAPRAVA",
+        "PRAZNO",
+        "OBRIS",
+        "SOCIOLOGIJA"
     };
     public static String nakljucnaBeseda(){
         int beseda=(int)(Math.random()*besede.length);

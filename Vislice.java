@@ -13,8 +13,10 @@ public class Vislice extends IgraZaDva implements IIgra{
             char ch= skritaBeseda.charAt(i);
             if(!Character.isWhitespace(ch))
             tekočaBeseda.append('_');
-            else
-            tekočaBeseda.append(' ');
+            else{
+                številoČrkDoKonca--;
+                tekočaBeseda.append(' ');
+            }
         }
         hardMode=false;
     }
@@ -45,7 +47,8 @@ public class Vislice extends IgraZaDva implements IIgra{
         }
         else if(prejšnjeČrke.length()>skritaBeseda.length()+12&&hardMode){
             return "Konec igre!"+
-                "\nIzgubil si igro.";
+                "\nIzgubil si igro"+
+                "\nZadnjo potezo je naredil "+getIgralec();
         }
         else{
             return "Konec igre!"+
