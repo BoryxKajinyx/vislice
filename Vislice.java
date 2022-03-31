@@ -113,7 +113,7 @@ public class Vislice extends IgraZaDva implements IIgra{
     }
     public boolean uganiČrko(String s){
         if(s.length()==1){
-            char ch=s.charAt(0);
+            char ch=Character.toUpperCase(s.charAt(0));
             prejšnjeČrke.append(ch);
             boolean pravaCrka=false;
             for (int i = 0; i < skritaBeseda.length(); i++) {
@@ -125,7 +125,7 @@ public class Vislice extends IgraZaDva implements IIgra{
             }
             return pravaCrka;
         }else{
-            if(s.equals(skritaBeseda)){
+            if(s.equalsIgnoreCase(skritaBeseda)){
                 številoČrkDoKonca=0;
                 tekočaBeseda.delete(0, tekočaBeseda.length());
                 tekočaBeseda.append(s);
