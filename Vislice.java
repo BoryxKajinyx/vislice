@@ -27,6 +27,10 @@ public class Vislice extends IgraZaDva implements IIgra{
                 "\nPorabljene črke so: "+prejšnjeČrke.toString()+
                 "\nNa vrsti je igralec "+getIgralec();
         }
+        else if(prejšnjeČrke.length()>skritaBeseda.length()+12){
+            return "Konec igre!"+
+                "\nIzgubil si igro.";
+        }
         else{
             return "Konec igre!"+
                 "\nBeseda je:"+skritaBeseda+
@@ -61,11 +65,7 @@ public class Vislice extends IgraZaDva implements IIgra{
             else{
                 ui.prompt(getPromptIgre());
                 String userInput=ui.getUserInput();
-                if(userInput.length()==1)
                 uganiČrko(userInput);
-                else{
-                    
-                }
             }
             
             if(!konecIgre())
@@ -75,7 +75,10 @@ public class Vislice extends IgraZaDva implements IIgra{
     }
     @Override
     public boolean konecIgre() {
-        return številoČrkDoKonca<1;
+        if(prejšnjeČrke.length()>skritaBeseda.length()+12)
+        return true;
+        else
+        return številoČrkDoKonca<=0;
     }
     @Override
     public String dobiZmagovalca() {
@@ -108,10 +111,16 @@ public class Vislice extends IgraZaDva implements IIgra{
         }else{
             if(s.equals(skritaBeseda)){
                 številoČrkDoKonca=0;
+                tekočaBeseda.delete(0, tekočaBeseda.length());
+                tekočaBeseda.append(s);
                 return true;
             }
-            else
-            return false;
+            else{
+                for(int i=0;i<s.length();i++){
+                    prejšnjeČrke.append(s.charAt(i));
+                }
+                return false;
+            }
         }
     }
 }
