@@ -3,6 +3,7 @@ public class Vislice extends IgraZaDva implements IIgra{
     private StringBuffer tekočaBeseda;
     private StringBuffer prejšnjeČrke;
     private int številoČrkDoKonca;
+    boolean hardMode;
     public Vislice() {
         skritaBeseda=Besede.nakljucnaBeseda();
         številoČrkDoKonca=skritaBeseda.length();
@@ -15,6 +16,21 @@ public class Vislice extends IgraZaDva implements IIgra{
             else
             tekočaBeseda.append(' ');
         }
+        hardMode=false;
+    }
+    public Vislice(boolean hardMode){
+        skritaBeseda=Besede.nakljucnaBeseda();
+        številoČrkDoKonca=skritaBeseda.length();
+        tekočaBeseda=new StringBuffer();
+        prejšnjeČrke=new StringBuffer();
+        for(int i=0;i<skritaBeseda.length();i++){
+            char ch= skritaBeseda.charAt(i);
+            if(!Character.isWhitespace(ch))
+            tekočaBeseda.append('_');
+            else
+            tekočaBeseda.append(' ');
+        }
+        this.hardMode=hardMode;
     }
     @Override
     public String getPromptIgre() {
@@ -27,7 +43,7 @@ public class Vislice extends IgraZaDva implements IIgra{
                 "\nPorabljene črke so: "+prejšnjeČrke.toString()+
                 "\nNa vrsti je igralec "+getIgralec();
         }
-        else if(prejšnjeČrke.length()>skritaBeseda.length()+12){
+        else if(prejšnjeČrke.length()>skritaBeseda.length()+12&&hardMode){
             return "Konec igre!"+
                 "\nIzgubil si igro.";
         }
@@ -75,7 +91,7 @@ public class Vislice extends IgraZaDva implements IIgra{
     }
     @Override
     public boolean konecIgre() {
-        if(prejšnjeČrke.length()>skritaBeseda.length()+12)
+        if(prejšnjeČrke.length()>skritaBeseda.length()+12&&hardMode)
         return true;
         else
         return številoČrkDoKonca<=0;
@@ -116,9 +132,12 @@ public class Vislice extends IgraZaDva implements IIgra{
                 return true;
             }
             else{
-                for(int i=0;i<s.length();i++){
-                    prejšnjeČrke.append(s.charAt(i));
+                if(hardMode){
+                    for(int i=0;i<s.length();i++){
+                        prejšnjeČrke.append(s.charAt(i));
+                    }
                 }
+                
                 return false;
             }
         }
